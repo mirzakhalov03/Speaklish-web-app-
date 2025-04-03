@@ -9,7 +9,7 @@ const SpeakingMock = () => {
         <div className='flex items-center justify-center mt-[130px]'>
             <div className='flex flex-col items-center  w-[80%] p-2 rounded-xl shadow-md'>
                 <img src={speaklishIcon} alt="" />
-                <h2>This feature will soon be added</h2>
+                <h2>This feature is not present on Figma</h2>
             </div>
         </div>
     </div>
