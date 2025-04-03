@@ -2,18 +2,22 @@ import { CgArrowTopRight } from "react-icons/cg";
 import { FaStar } from "react-icons/fa";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { WebApp } from "@twa-dev/sdk"; // Import Telegram SDK
+
+// Import Telegram SDK properly
+const tg = window.Telegram?.WebApp;
 
 const GreetingMock = () => {
-  const [theme, setTheme] = useState(WebApp.themeParams);
+  const [theme, setTheme] = useState(tg?.themeParams || {});
 
   useEffect(() => {
-    WebApp.ready(); // Ensure WebApp is initialized
-    WebApp.expand(); // Expand to full height
+    if (!tg) return; // Prevent errors if Telegram SDK is not available
+
+    tg.ready(); // Ensure Telegram WebApp is initialized
+    tg.expand(); // Expand to full height
 
     // Listen for theme changes
-    WebApp.onEvent("themeChanged", () => {
-      setTheme(WebApp.themeParams);
+    tg.onEvent("themeChanged", () => {
+      setTheme(tg.themeParams);
     });
   }, []);
 
@@ -31,14 +35,14 @@ const GreetingMock = () => {
           </h1>
           <span
             className="text-[24px] font-[500] leading-relaxed tracking-[0.35px] align-middle"
-            style={{ color: theme.hint_color || "#606E80" }} // Adjust hint color
+            style={{ color: theme.hint_color || "#606E80" }}
           >
             Bobirjon
           </span>
         </span>
         <div
           className="w-[170px] rounded-[18px] py-2 px-4"
-          style={{ backgroundColor: theme.secondary_bg_color || "#F5F6FA" }} // Card background
+          style={{ backgroundColor: theme.secondary_bg_color || "#F5F6FA" }}
         >
           <p className="font-[500] leading-relaxed tracking-[0.35px]">
             Mock score{" "}
@@ -54,7 +58,7 @@ const GreetingMock = () => {
         </div>
       </div>
       <div
-        className="w-full mt-[12px] p-[16px] rounded-[18px] flex items-center justify-between gap-[20px]"
+        className="w-full mt-[12px] p-[10px] rounded-[18px] flex items-center justify-between gap-[20px]"
         style={{ backgroundColor: theme.secondary_bg_color || "#F5F6FA" }}
       >
         <div
