@@ -8,7 +8,7 @@ import { useState, useRef, useEffect } from "react"
 import botImage from "../../images/bot-logo.svg"
 import avatarImage from "../../images/avatar-img.svg"
 import { Link } from "react-router-dom"
-import botSad from '../../images/speaklish-sad-logo.svg'
+import botSad from '../../images/Speaklish-sad-logo.svg'
 
 const TopBar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)

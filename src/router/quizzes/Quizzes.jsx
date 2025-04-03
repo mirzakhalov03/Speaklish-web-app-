@@ -1,7 +1,7 @@
 import { BsArrowLeft } from "react-icons/bs"; 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import speaklishLogo from '../../images/speaklish-sad-logo.svg'
+import speaklishLogo from '../../images/Speaklish-sad-logo.svg'
 
 const QuizQuestion = () => {
   const [selectedOption, setSelectedOption] = useState(null);
