@@ -7,7 +7,7 @@ const SpeakingMock = () => {
     <div className='p-4'>
         <TopBar/>
         <div className='flex items-center justify-center mt-[130px]'>
-            <div className='flex flex-col items-center  w-[80%] p-2 bg-[#D7FFEF] rounded-xl shadow-md'>
+            <div className='flex flex-col items-center  w-[80%] p-2 bg-[#ffffff] rounded-xl shadow-md'>
                 <img src={speaklishIcon} alt="" />
                 <h2>This feature will soon be added</h2>
             </div>

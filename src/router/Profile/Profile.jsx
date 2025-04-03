@@ -91,8 +91,8 @@ const ProfilePage = () => {
         <div>
           <label className="block text-gray-600 mb-2 text-">Phone</label>
           <div className="flex">
-            <div className="bg-gray-100 p-2 border border-gray-300 rounded-l-lg text-gray-600 flex items-center">
-              <BiPhone className="text-[24px] mr-1"/>
+            <div className="bg-gray-100 p-1 border border-gray-300 rounded-l-lg text-gray-600 flex items-center">
+              <BiPhone className="text-[20px] mr-1"/>
               +998
             </div>
             <input
@@ -101,7 +101,7 @@ const ProfilePage = () => {
               placeholder="97 941-32-00"
               value={formData.phone}
               onChange={handleChange}
-              className="flex-grow p-2 border border-gray-300 rounded-r-lg text-gray-500"
+              className="flex-grow py-2 px-0 indent-3 border border-gray-300 rounded-r-lg text-gray-500"
             />
           </div>
         </div>

@@ -59,7 +59,7 @@ const Calendar = () => {
   ]
 
   return (
-    <div className="w-full max-w-md p-4 mx-auto bg-[#F5F6FA] rounded-[24px] mt-[12px]">
+    <div className="w-full max-w-md p-4 mx-auto bg-[#F5F6FA] rounded-[24px] mt-[12px] mb-[100px]">
       <div className="flex items-center justify-between mb-4">
         <button className="p-2 text-gray-500">
           <ChevronLeft size={20} />
