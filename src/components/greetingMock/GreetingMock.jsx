@@ -7,6 +7,7 @@ const tg = window.Telegram?.WebApp;
 
 const GreetingMock = () => {
   const [theme, setTheme] = useState(tg?.themeParams || {});
+  const [userName, setUserName] = useState("user");
 
   useEffect(() => {
     if (!tg) return;
@@ -14,16 +15,20 @@ const GreetingMock = () => {
     tg.ready();
     tg.expand();
 
-    // Listen for theme changes
+    const user = tg.initDataUnsafe?.user;
+    if (user) {
+      const fullName = [user.first_name, user.last_name].filter(Boolean).join(" ");
+      setUserName(fullName || user.username || "user");
+    }
+
     tg.onEvent("themeChanged", () => {
       setTheme(tg.themeParams);
     });
   }, []);
 
-  // Determine the text color based on theme
-  const textColor = theme.text_color || "#000000"; // Black for light mode
-  const hintColor = theme.hint_color || "#606E80"; // Lighter text for descriptions
-  const buttonColor = theme.button_color || "#07DA83"; // Accent color
+  const textColor = theme.text_color || "#000000";
+  const hintColor = theme.hint_color || "#606E80";
+  const buttonColor = theme.button_color || "#07DA83";
   const isDarkMode = theme.bg_color === "#000000" || theme.bg_color?.toLowerCase() === "#1c1c1c";
 
   return (
@@ -32,15 +37,15 @@ const GreetingMock = () => {
         <span>
           <h1
             className="text-[24px] font-[500] leading-relaxed tracking-[0.35px] align-middle"
-            style={{ color: isDarkMode ? "#FFFFFF" : textColor }} // White in dark mode
+            style={{ color: isDarkMode ? "#FFFFFF" : textColor }}
           >
-            Hello, user
+            Hello, {userName}
           </h1>
           <span
             className="text-[24px] font-[500] leading-relaxed tracking-[0.35px] align-middle"
-            style={{ color: isDarkMode ? "#D3D3D3" : hintColor }} // Lighter gray in dark mode
+            style={{ color: isDarkMode ? "#D3D3D3" : hintColor }}
           >
-            Bobirjon
+            Welcome!
           </span>
         </span>
         <div
@@ -51,8 +56,7 @@ const GreetingMock = () => {
           }}
         >
           <p className="font-[500] leading-relaxed tracking-[0.35px]">
-            Mock score{" "}
-            <span style={{ color: buttonColor }}>30%</span>
+            Mock score <span style={{ color: buttonColor }}>30%</span>
           </p>
           <div className="flex items-center gap-1">
             <FaStar style={{ color: buttonColor }} className="text-[24px]" />
@@ -60,6 +64,7 @@ const GreetingMock = () => {
           </div>
         </div>
       </div>
+
       <div
         className="w-full mt-[12px] p-[16px] rounded-[18px] flex items-center justify-between gap-[10px]"
         style={{ backgroundColor: theme.secondary_bg_color || "#F5F6FA" }}

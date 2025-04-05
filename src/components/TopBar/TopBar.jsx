@@ -16,7 +16,6 @@ const TopBar = () => {
   const dropdownRef = useRef(null)
   const modalRef = useRef(null)
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -35,7 +34,6 @@ const TopBar = () => {
     }
   }, [])
 
-  // Toggle dropdown
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen)
   }
@@ -61,15 +59,16 @@ const TopBar = () => {
       {/* Blurred overlay when logout modal is open */}
       {showLogoutModal && <div className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm z-30" />}
 
-      <div className="w-full h-[50px] mt-[15px] flex items-center justify-between relative z-4">
-        <Link to={"/profile"} className="flex relative">
-          <div className="w-[50px] h-[50px] bg-[#D7FFEF] rounded-full flex items-center justify-center">
-            <img src={botImage || "/placeholder.svg"} alt="" />
-          </div>
-          <div className="w-[50px] h-[50px] bg-[#07172a] rounded-full absolute left-8 -z-10">
-            <img src={avatarImage || "/placeholder.svg"} alt="" />
-          </div>
-        </Link>
+      <div className="w-full h-[50px] mt-[15px] flex items-center justify-between relative z-5">
+      <Link to={"/profile"} className="flex relative w-full h-full">
+        <div className="w-[50px] h-[50px] bg-[#D7FFEF] rounded-full absolute top-0 left-0 flex items-center justify-center z-[2]">
+          <img src={botImage || "/placeholder.svg"} alt="" />
+        </div>
+
+        <div className="w-[50px] h-[50px] rounded-full absolute left-8 z-[1]">
+          <img src={avatarImage} alt="" />
+        </div>
+      </Link>
 
         <div ref={dropdownRef}>
           <button
