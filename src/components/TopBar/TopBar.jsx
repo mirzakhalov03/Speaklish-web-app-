@@ -82,7 +82,7 @@ const TopBar = () => {
       {/* Blurred overlay when logout modal is open */}
       {showLogoutModal && <div className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm z-30" />}
 
-      <div className="w-full h-[50px] mt-[15px] flex items-center justify-between relative z-5">
+      <div className="max-w-[450px] w-full mx-auto h-[50px] mt-[15px] flex items-center justify-between relative z-5">
       <Link to={"/profile"} className="flex relative w-full h-full">
         <div className="w-[50px] h-[50px] bg-[#D7FFEF] rounded-full absolute top-0 left-0 flex items-center justify-center z-[2]">
           <img src={botImage || "/placeholder.svg"} alt="" />

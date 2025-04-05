@@ -39,7 +39,7 @@ const GreetingMock = () => {
   }, []);
 
   // Theme-based styling
-  const textColor = theme.text_color || "#000000";
+  const textColor = theme.text_color || "#181D25";
   const hintColor = theme.hint_color || "#606E80";
   const buttonColor = theme.button_color || "#07DA83";
   const isDarkMode =
@@ -48,7 +48,7 @@ const GreetingMock = () => {
   return (
     <div>
       {/* Greeting Header */}
-      <div className="mt-6 flex items-center justify-between">
+      <div className="max-w-[450px] w-full mx-auto mt-6 flex items-center justify-between">
         <div>
           <h1
             className="text-2xl font-medium tracking-wide"

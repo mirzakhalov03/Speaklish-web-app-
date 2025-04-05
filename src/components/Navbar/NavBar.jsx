@@ -6,7 +6,7 @@ import NavbarIcon3 from '../../images/NavbarIcon3'
 
 const NavBar = () => {
   return (
-    <div className="w-[93%] h-[70px] bg-[#F5F6FA] flex items-center justify-between fixed bottom-0 left-[16px] rounded-[24px] py-[10px] px-4 mb-[20px] z-10 navbarShadow">
+    <div className="max-w-[400px] mx-auto w-[93%] h-[70px] bg-[#F5F6FA] flex items-center justify-between fixed bottom-0 left-[16px] rounded-[24px] py-[10px] px-4 mb-[20px] z-10 navbarShadow">
       
       <NavLink
         to='/'

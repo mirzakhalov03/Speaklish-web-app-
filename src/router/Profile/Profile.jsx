@@ -10,6 +10,7 @@ const ProfilePage = () => {
   const navigate = useNavigate();
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
   const [userInitial, setUserInitial] = useState('')
+  const [theme, setTheme] = useState({})
   
   const [formData, setFormData] = useState({
     firstName: '',
@@ -44,7 +45,25 @@ const ProfilePage = () => {
       setFormData(userDataObject);
     }
 
+    setTheme(tg.themeParams || {})
+
+    const handleThemeChange = () => {
+      setTheme({...tg.themeParams});
+
+
+    }
+
+    tg.onEvent("themeChanged", handleThemeChange)
+
+    return () => {
+      tg.offEvent("themeChanged", handleThemeChange)
+    }
+
   }, []);
+
+  const textColor = theme.text_color || "#181D25"
+  const hintColor = theme.hint_color || "#606E80"
+  const isDarkMode = theme.bg_color === "#181D25" || theme.bg_color?.toLowerCase() === "#1c1c1c"
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -70,10 +89,18 @@ const ProfilePage = () => {
     <div className="p-6 bg-white min-h-screen">
       {/* Header */}
       <div className="flex items-center mb-6">
-        <button onClick={handleGoBack} className="mr-4">
+        <button 
+          onClick={handleGoBack} 
+          className="mr-4"
+          style={{color: isDarkMode ? "#FFF" : textColor}}
+          >
           <BsArrowLeft className="text-[24px]"/>
         </button>
-        <h1 className="text-2xl text-gray-600 font-medium">My profile</h1>
+        <h1 
+          className="text-2xl text-gray-600 font-medium"
+          style={{color: isDarkMode ? "#FFF" : textColor}}
+        >
+          My profile</h1>
       </div>
 
       {/* Profile Picture */}
