@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import { BsArrowLeft } from "react-icons/bs"; 
+import { BiUser } from "react-icons/bi"; 
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PasswordUpdateModal from '../../components/passwordModal/PasswordUpdateModal'; // Import the modal component
 import { toast } from 'react-toastify';
@@ -7,6 +9,7 @@ import { BiPhone } from 'react-icons/bi';
 const ProfilePage = () => {
   const navigate = useNavigate();
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+  const [userInitial, setUserInitial] = useState('')
   
   const [formData, setFormData] = useState({
     firstName: '',
@@ -15,6 +18,33 @@ const ProfilePage = () => {
     teacher: 'Diana Roy',
     group: 'Speaklish'
   });
+
+
+  useEffect(() => {
+    const tg = window.Telegram?.WebApp;
+    
+    if (!tg || !tg.initDataUnsafe) return;
+
+    const user = tg.initDataUnsafe.user;
+
+    if (user) {
+      const userDataObject = {
+        firstName: user.first_name || '',
+        lastName: user.last_name || '',
+        // Add other user data here if available from Telegram WebApp API
+        phone: user.phone_number || '',  // Assuming the Telegram API provides this (you might need to handle this differently)
+        teacher: 'Diana Roy',  // Example static value or dynamic if possible
+        group: 'Speaklish',    // Example static value or dynamic if possible
+      };
+
+      const userInitialLetter = user?.first_name.slice(0, 1)
+
+      setUserInitial(userInitialLetter)
+
+      setFormData(userDataObject);
+    }
+
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,21 +71,15 @@ const ProfilePage = () => {
       {/* Header */}
       <div className="flex items-center mb-6">
         <button onClick={handleGoBack} className="mr-4">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M19 12H5" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M12 19L5 12L12 5" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
+          <BsArrowLeft className="text-[24px]"/>
         </button>
         <h1 className="text-2xl text-gray-600 font-medium">My profile</h1>
       </div>
 
       {/* Profile Picture */}
       <div className="flex justify-center mb-8">
-        <div className="w-24 h-24 rounded-full border-2 border-green-400 flex items-center justify-center bg-gray-100">
-          <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M25 25C29.1421 25 32.5 21.6421 32.5 17.5C32.5 13.3579 29.1421 10 25 10C20.8579 10 17.5 13.3579 17.5 17.5C17.5 21.6421 20.8579 25 25 25Z" fill="#9AA5B1"/>
-            <path d="M25 27.5C18.75 27.5 12.5 31.25 12.5 40H37.5C37.5 31.25 31.25 27.5 25 27.5Z" fill="#9AA5B1"/>
-          </svg>
+        <div className="w-24 h-24 rounded-full border-4 border-green-400 flex items-center justify-center bg-[#D7FFEF]">
+          <h2 className="text-[40px] text-[#07DA83]">{userInitial || (<BiUser className="text-[40px]"/>)}</h2>
         </div>
       </div>
 
