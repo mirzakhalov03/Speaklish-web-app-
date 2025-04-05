@@ -22,7 +22,8 @@ const GreetingMock = () => {
     const user = tg.initDataUnsafe?.user;
     if (user) {
       const fullName = [user.first_name, user.last_name].filter(Boolean).join(" ");
-      setUserName(fullName || user.username || "user");
+      const firstName = user?.first_name
+      setUserName(firstName || user.username || "user");
     }
 
     // Listen for theme changes
@@ -72,10 +73,10 @@ const GreetingMock = () => {
           }}
         >
           <p className="font-medium">
-            Mock score <span style={{ color: buttonColor }}>30%</span>
+            Mock score <span style={{ color: '#07DA83' }}>30%</span>
           </p>
           <div className="flex items-center gap-1">
-            <FaStar style={{ color: buttonColor }} className="text-2xl" />
+            <FaStar style={{ color: '#07DA83' }} className="text-2xl" />
             <h2 className="font-semibold text-2xl">8.5</h2>
           </div>
         </div>
@@ -83,7 +84,7 @@ const GreetingMock = () => {
 
       {/* Promo Box */}
       <div
-        className="w-full mt-3 p-4 rounded-[18px] flex items-center justify-between gap-3"
+        className="max-w-[450px] w-full mx-auto mt-3 p-4 rounded-[18px] flex items-center justify-between gap-3"
         style={{ backgroundColor: theme.secondary_bg_color || "#F5F6FA" }}
       >
         <div
@@ -102,12 +103,12 @@ const GreetingMock = () => {
             className="text-sm"
             style={{ color: isDarkMode ? "#D3D3D3" : hintColor }}
           >
-            Today on Speaklish, there is amazing news — don't miss it!
+            Today on Speaklish, there is amazing news, don't miss it!
           </p>
           <Link
             to="#"
             className="text-sm flex items-center gap-1 font-medium"
-            style={{ color: buttonColor }}
+            style={{ color: '#07DA83' }}
           >
             Start <CgArrowTopRight />
           </Link>
