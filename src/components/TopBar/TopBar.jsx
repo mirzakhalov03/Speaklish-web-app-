@@ -13,8 +13,31 @@ import botSad from '../../images/Speaklish-sad-logo.svg'
 const TopBar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [showLogoutModal, setShowLogoutModal] = useState(false)
+  const [userInitial, setUserInitial] = useState('')
   const dropdownRef = useRef(null)
   const modalRef = useRef(null)
+
+  useEffect(() => {
+    const tg = window.Telegram?.WebApp;
+
+    if(!tg) return;
+
+    tg.ready();
+    tg.expand();
+
+    const user = tg.initDataUnsafe?.user;
+
+    if(user) {
+      const initial = user?.first_name?.slice(0, 1)
+      setUserInitial(initial || 'U')
+    }
+
+
+
+
+
+  }, [])
+
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -65,8 +88,8 @@ const TopBar = () => {
           <img src={botImage || "/placeholder.svg"} alt="" />
         </div>
 
-        <div className="w-[50px] h-[50px] rounded-full absolute left-8 z-[1]">
-          <img src={avatarImage} alt="" />
+        <div className="w-[50px] h-[50px] bg-[#07DA83] overflow-hidden border-2 border-[#159e65fd] rounded-full absolute left-8 z-[1] flex justify-center items-center">
+          <h1 className="text-[25px] font-medium text-white ">{userInitial || 'J'}</h1>
         </div>
       </Link>
 

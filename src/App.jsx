@@ -40,14 +40,6 @@ function App() {
         minHeight: "100vh",
       }}
     >
-      {/* Optional: Display user info at top for testing */}
-      {user && (
-        <div style={{ padding: '10px' }}>
-          <p>👋 Welcome, {user.first_name} {user?.last_name || ''}</p>
-          <p>🆔 Telegram ID: {user.id}</p>
-          <p>📛 Username: @{user.username}</p>
-        </div>
-      )}
 
       <RouteController />
       <ToastContainer />
